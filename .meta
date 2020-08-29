@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "masks-front": "git@github.com:areffects/masks.fe.git",
+    "masks-back": "git@github.com:areffects/masks.be.git"
+  }
+}
