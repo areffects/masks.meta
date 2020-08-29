@@ -1,0 +1,10 @@
+steps:
+  - label: 'build mongo'
+    command:
+      - "docker-compose build mongo"
+
+  - wait
+
+  - label: 'start mongo'
+    command:
+      - "docker-compose up -d mongo"

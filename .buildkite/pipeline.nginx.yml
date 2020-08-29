@@ -1,0 +1,10 @@
+steps:
+  - label: 'build nginx'
+    command:
+      - "docker-compose build nginx"
+
+  - wait
+
+  - label: 'start nginx'
+    command:
+      - "docker-compose up -d nginx"
