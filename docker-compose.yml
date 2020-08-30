@@ -20,8 +20,9 @@ services:
     build:
       context: ./masks-front/
       dockerfile: ../dockerfiles/masks-front/Dockerfile
-    env_file:
-      - ./masks-front/.env
+    environment:
+        - NODE_ENV
+        - API_URL
     ports:
       - 3000:3000
     volumes:
@@ -36,8 +37,8 @@ services:
     build:
       context: ./masks-front/
       dockerfile: ../dockerfiles/masks-front/.storybook/Dockerfile
-    env_file:
-      - ./masks-front/.env
+    environment:
+      - NODE_ENV
     ports:
       - 6006:6006
     volumes:
@@ -53,8 +54,9 @@ services:
     build:
       context: ./masks-back/
       dockerfile: ../dockerfiles/masks-back/Dockerfile
-    env_file:
-      - ./lommelegen-front/.env
+    environment:
+      - NODE_ENV
+      - PORT
     ports:
       - 4000:4000
     volumes:
@@ -64,5 +66,22 @@ services:
       - ./masks-back/package.json:/app/package.json
       - mongodata:/data/db
     command: ["npm", "run", "start:prod"]
+  market:
+    build:
+      context: ./masks-market/
+      dockerfile: ../dockerfiles/masks-market/Dockerfile
+    environment:
+      - NODE_ENV
+      - API_URL
+    ports:
+      - 3010:3010
+    volumes:
+      - ./masks-market/src:/app/src
+      - ./masks-market/public:/app/public
+      - ./masks-market/.env:/app/.env
+      - ./masks-market/tsconfig.json:/app/tsconfig.json
+      - ./masks-market/package.json:/app/package.json
+      - mongodata:/data/db
+    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
 volumes:
   mongodata:
