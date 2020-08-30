@@ -1,5 +1,6 @@
-masks-front
+./masks-front
+./masks-market
 !dockerfiles/masks-front
-masks-back
+./masks-back
 !dockerfiles/masks-back
 masks.code-workspace
