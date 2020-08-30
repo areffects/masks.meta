@@ -1,38 +1,6 @@
 version: "3"
 
 services:
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./dockerfiles/nginx/nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - 80:80
-      - 8080:8080
-      - 443:443
-  mongo:
-    build: ./dockerfiles/mongo/
-    volumes:
-      - mongodata:/data/db
-      - ./dockerfiles/mongo/mongod.conf:/etc/mongo/mongod.conf
-    ports:
-      - 27017:27017
-  front:
-    build:
-      context: ./masks-front/
-      dockerfile: ../dockerfiles/masks-front/Dockerfile
-    environment:
-        - NODE_ENV
-        - API_URL
-    ports:
-      - 3000:3000
-    volumes:
-      - ./masks-front/src:/app/src
-      - ./masks-front/public:/app/public
-      - ./masks-front/.env:/app/.env
-      - ./masks-front/tsconfig.json:/app/tsconfig.json
-      - ./masks-front/package.json:/app/package.json
-      - mongodata:/data/db
-    command: ["./node_modules/.bin/next", "start", "-p", "3000"]
   storybook:
     build:
       context: ./masks-front/

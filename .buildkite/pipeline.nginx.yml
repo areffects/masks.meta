@@ -1,22 +1,10 @@
 steps:
-  - label: "install meta"
+  - label: 'build nginx'
     command:
-      - "npm install meta -g"
+      - "docker-compose build -f docker-compose.serivces nginx"
 
   - wait
 
-  - label: "setup meta"
+  - label: 'start nginx'
     command:
-      - "meta open && meta git update"
-
-  - wait
-
-  - label: "build nginx"
-    command:
-      - "docker-compose build nginx"
-
-  - wait
-
-  - label: "start nginx"
-    command:
-      - "docker-compose up -d nginx"
+      - "docker-compose up -d -f docker-compose.serivces nginx"
