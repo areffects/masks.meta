@@ -1,10 +1,4 @@
 steps:
-  - label: 'build nginx'
+  - label: 'build & run – nginx'
     command:
-      - "docker-compose build -f docker-compose.services.yml nginx"
-
-  - wait
-
-  - label: 'start nginx'
-    command:
-      - "docker-compose up -d -f docker-compose.services.yml nginx"
+      - "docker-compose -f "docker-compose.services.yml" up -d --build nginx"

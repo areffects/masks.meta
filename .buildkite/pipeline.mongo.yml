@@ -1,10 +1,4 @@
 steps:
-  - label: 'build mongo'
+  - label: 'build & run – mongo'
     command:
-      - "docker-compose build -f docker-compose.services.yml mongo"
-
-  - wait
-
-  - label: 'start mongo'
-    command:
-      - "docker-compose up -d -f docker-compose.services.yml mongo"
+      - "docker-compose -f "docker-compose.services.yml" up -d --build mongo"
