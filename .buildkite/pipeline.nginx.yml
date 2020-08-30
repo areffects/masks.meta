@@ -1,4 +1,16 @@
 steps:
+  - label: 'install meta'
+  command:
+    - "yarn global add meta"
+
+  - wait
+
+  - label: 'setup meta'
+    command:
+      - "meta open && meta git update"
+
+  - wait
+
   - label: 'build nginx'
     command:
       - "docker-compose build nginx"
