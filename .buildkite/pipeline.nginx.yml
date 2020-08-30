@@ -1,7 +1,7 @@
 steps:
   - label: "install meta"
     command:
-      - "yarn global add meta"
+      - "npm install meta -g"
 
   - wait
 
