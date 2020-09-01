@@ -13,7 +13,7 @@ npm i -g meta
 2. Clone this repo
 
 ```sh
-meta git git@github.com:areffects/masks.meta.git
+meta git clone git@github.com:areffects/masks.meta.git
 ```
 
 3. Create new branch (USE `develop` AS BASE!!!)
