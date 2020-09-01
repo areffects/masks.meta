@@ -5,11 +5,7 @@ services:
     container_name: masks-storybook
     build:
       context: ./masks-front/
-<<<<<<< HEAD:docker-compose.yml
       dockerfile: ./.storybook/Dockerfile
-=======
-      dockerfile: ../dockerfiles/masks-front/.storybook/Dockerfile
->>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
     ports:
@@ -27,11 +23,7 @@ services:
     container_name: masks-back
     build:
       context: ./masks-back/
-<<<<<<< HEAD:docker-compose.yml
       dockerfile: ./Dockerfile
-=======
-      dockerfile: ../dockerfiles/masks-back/Dockerfile
->>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
       - PORT
@@ -45,16 +37,10 @@ services:
       - mongodata:/data/db
     command: ["npm", "run", "start:prod"]
   market:
-<<<<<<< HEAD:docker-compose.yml
     container_name: masks-market
     build:
       context: ./masks-market/
       dockerfile: ./Dockerfile
-=======
-    build:
-      context: ./masks-market/
-      dockerfile: ../dockerfiles/masks-market/Dockerfile
->>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
       - API_URL
