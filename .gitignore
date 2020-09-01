@@ -5,3 +5,6 @@
 ./masks-back
 !dockerfiles/masks-back
 masks.code-workspace
+/masks-fe-landing/
+/masks-fe-market/
+/masks-be/
