@@ -9,7 +9,7 @@ services:
     environment:
       - NODE_ENV
     ports:
-      - 6006:6006
+      - 19000:19000
     volumes:
       - ./masks-fe-landing/src:/app/src
       - ./masks-fe-landing/public:/app/public
@@ -17,8 +17,7 @@ services:
       - ./masks-fe-landing/tsconfig.json:/app/tsconfig.json
       - ./masks-fe-landing/package.json:/app/package.json
       - ./masks-fe-landing/.storybook:/app/.storybook
-      - mongodata:/data/db
-    command: ["yarn", "storybook"]
+    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
   masks-be:
     container_name: masks-be
     build:
@@ -28,13 +27,12 @@ services:
       - NODE_ENV
       - PORT
     ports:
-      - 4000:4000
+      - 19010:19010
     volumes:
       - ./masks-be/src:/app/src
       - ./masks-be/.env:/app/.env
       - ./masks-be/tsconfig.json:/app/tsconfig.json
       - ./masks-be/package.json:/app/package.json
-      - mongodata:/data/db
     command: ["npm", "run", "start:prod"]
   masks-fe-market:
     container_name: masks-fe-market
@@ -45,14 +43,13 @@ services:
       - NODE_ENV
       - API_URL
     ports:
-      - 3010:3010
+      - 19001:19001
     volumes:
       - ./masks-fe-market/src:/app/src
       - ./masks-fe-market/public:/app/public
       - ./masks-fe-market/.env:/app/.env
       - ./masks-fe-market/tsconfig.json:/app/tsconfig.json
       - ./masks-fe-market/package.json:/app/package.json
-      - mongodata:/data/db
-    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
+    command: ["./node_modules/.bin/next", "start", "-p", "19001"]
 volumes:
   mongodata:

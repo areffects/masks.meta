@@ -63,3 +63,17 @@ To ls all running docker-containers
 ```
 docker ps | grep masks
 ```
+
+## Vault
+
+To setup vault you need to login here
+
+```
+http://0.0.0.0:8200
+```
+
+All config here
+
+```
+./dockerfiles/vault/config
+```
