@@ -1,28 +1,28 @@
 version: "3"
 
 services:
-  storybook:
-    container_name: masks-storybook
+  masks-fe-landing:
+    container_name: masks-fe-landing
     build:
-      context: ./masks-front/
+      context: ./masks-fe-landing/
       dockerfile: ./.storybook/Dockerfile
     environment:
       - NODE_ENV
     ports:
       - 6006:6006
     volumes:
-      - ./masks-front/src:/app/src
-      - ./masks-front/public:/app/public
-      - ./masks-front/.env:/app/.env
-      - ./masks-front/tsconfig.json:/app/tsconfig.json
-      - ./masks-front/package.json:/app/package.json
-      - ./masks-front/.storybook:/app/.storybook
+      - ./masks-fe-landing/src:/app/src
+      - ./masks-fe-landing/public:/app/public
+      - ./masks-fe-landing/.env:/app/.env
+      - ./masks-fe-landing/tsconfig.json:/app/tsconfig.json
+      - ./masks-fe-landing/package.json:/app/package.json
+      - ./masks-fe-landing/.storybook:/app/.storybook
       - mongodata:/data/db
     command: ["yarn", "storybook"]
-  back:
-    container_name: masks-back
+  masks-be:
+    container_name: masks-be
     build:
-      context: ./masks-back/
+      context: ./masks-be/
       dockerfile: ./Dockerfile
     environment:
       - NODE_ENV
@@ -30,16 +30,16 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ./masks-back/src:/app/src
-      - ./masks-back/.env:/app/.env
-      - ./masks-back/tsconfig.json:/app/tsconfig.json
-      - ./masks-back/package.json:/app/package.json
+      - ./masks-be/src:/app/src
+      - ./masks-be/.env:/app/.env
+      - ./masks-be/tsconfig.json:/app/tsconfig.json
+      - ./masks-be/package.json:/app/package.json
       - mongodata:/data/db
     command: ["npm", "run", "start:prod"]
-  market:
-    container_name: masks-market
+  masks-fe-market:
+    container_name: masks-fe-market
     build:
-      context: ./masks-market/
+      context: ./masks-fe-market/
       dockerfile: ./Dockerfile
     environment:
       - NODE_ENV
@@ -47,11 +47,11 @@ services:
     ports:
       - 3010:3010
     volumes:
-      - ./masks-market/src:/app/src
-      - ./masks-market/public:/app/public
-      - ./masks-market/.env:/app/.env
-      - ./masks-market/tsconfig.json:/app/tsconfig.json
-      - ./masks-market/package.json:/app/package.json
+      - ./masks-fe-market/src:/app/src
+      - ./masks-fe-market/public:/app/public
+      - ./masks-fe-market/.env:/app/.env
+      - ./masks-fe-market/tsconfig.json:/app/tsconfig.json
+      - ./masks-fe-market/package.json:/app/package.json
       - mongodata:/data/db
     command: ["./node_modules/.bin/next", "start", "-p", "3010"]
 volumes:
