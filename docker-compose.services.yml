@@ -1,7 +1,24 @@
 version: "3"
 
 services:
-  nginx:
+  masks-vault:
+    image: vault:latest
+    volumes:
+      - ./dockerfiles/vault/config:/vault/config
+      - ./dockerfiles/vault/policies:/vault/policies
+      - ./dockerfiles/vault/data:/vault/data
+    ports:
+      - 8200:8200
+    environment:
+      - VAULT_ADDR=http://0.0.0.0:8200
+      - VAULT_API_ADDR=http://0.0.0.0:8200
+      - VAULT_ADDRESS=http://0.0.0.0:8200
+      - VAULT_DEV_LISTEN_ADDRESS=http://0.0.0.0:8200
+      - VAULT_DEV_ROOT_TOKEN_ID=myroot
+    cap_add:
+      - IPC_LOCK
+    command: vault server -config=/vault/config/vault.json
+  masks-nginx:
     image: nginx:latest
     volumes:
       - ./dockerfiles/nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -9,7 +26,7 @@ services:
       - 80:80
       - 8080:8080
       - 443:443
-  mongo:
+  masks-mongo:
     build: ./dockerfiles/mongo/
     volumes:
       - mongodata:/data/db
