@@ -43,3 +43,23 @@ meta git push origin -u <YOUR_BRANCH_NAME>
 ```sh
 meta git push
 ```
+
+## Docker 
+
+To start apps
+
+```sh
+docker-compose -f docker-compose.apps.yml up -d
+```
+
+To start services
+
+```
+docker-compose -f docker-compose.services.yml up -d
+```
+
+To ls all running docker-containers
+
+```
+docker ps | grep 
+```
