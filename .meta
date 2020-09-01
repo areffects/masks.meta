@@ -1,7 +1,13 @@
 {
   "projects": {
+<<<<<<< HEAD
     "masks-fe-landing": "git@github.com:areffects/masks.fe.landing.git",
     "masks-fe-market": "git@github.com:areffects/masks.fe.market.git"
     "masks-be": "git@github.com:areffects/masks.be.git"
+=======
+    "masks-front": "git@github.com:areffects/masks.fe.landing.git",
+    "masks-market": "git@github.com:areffects/masks.fe.market.git",
+    "masks-back": "git@github.com:areffects/masks.be.git"
+>>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8
   }
 }

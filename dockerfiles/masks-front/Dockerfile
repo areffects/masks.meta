@@ -1,4 +1,4 @@
-FROM node:10.9.0
+FROM mhart/alpine-node:12 AS builder
 
 WORKDIR /app
 COPY ./ ./

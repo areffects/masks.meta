@@ -1,42 +1,15 @@
 version: "3"
 
 services:
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./dockerfiles/nginx/nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - 80:80
-      - 8080:8080
-      - 443:443
-  mongo:
-    build: ./dockerfiles/mongo/
-    volumes:
-      - mongodata:/data/db
-      - ./dockerfiles/mongo/mongod.conf:/etc/mongo/mongod.conf
-    ports:
-      - 27017:27017
-  front:
-    build:
-      context: ./masks-front/
-      dockerfile: ../dockerfiles/masks-front/Dockerfile
-    env_file:
-      - ./masks-front/.env
-    ports:
-      - 3000:3000
-    volumes:
-      - ./masks-front/src:/app/src
-      - ./masks-front/public:/app/public
-      - ./masks-front/.env:/app/.env
-      - ./masks-front/tsconfig.json:/app/tsconfig.json
-      - ./masks-front/package.json:/app/package.json
-      - mongodata:/data/db
-    command: ["./node_modules/.bin/next", "start", "-p", "3000"]
   storybook:
     container_name: masks-storybook
     build:
       context: ./masks-front/
+<<<<<<< HEAD:docker-compose.yml
       dockerfile: ./.storybook/Dockerfile
+=======
+      dockerfile: ../dockerfiles/masks-front/.storybook/Dockerfile
+>>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
     ports:
@@ -54,7 +27,11 @@ services:
     container_name: masks-back
     build:
       context: ./masks-back/
+<<<<<<< HEAD:docker-compose.yml
       dockerfile: ./Dockerfile
+=======
+      dockerfile: ../dockerfiles/masks-back/Dockerfile
+>>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
       - PORT
@@ -68,10 +45,16 @@ services:
       - mongodata:/data/db
     command: ["npm", "run", "start:prod"]
   market:
+<<<<<<< HEAD:docker-compose.yml
     container_name: masks-market
     build:
       context: ./masks-market/
       dockerfile: ./Dockerfile
+=======
+    build:
+      context: ./masks-market/
+      dockerfile: ../dockerfiles/masks-market/Dockerfile
+>>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
       - API_URL
