@@ -4,6 +4,7 @@
     "masks.fe.market": "git@github.com:areffects/masks.fe.market.git",
     "masks.mongo": "git@github.com:areffects/masks.mongo.git",
     "masks.nginx": "git@github.com:areffects/masks.nginx.git",
+    "masks.vault": "git@github.com:areffects/masks.vault.git",
     "masks.be": "git@github.com:areffects/masks.be.git"
   }
 }
