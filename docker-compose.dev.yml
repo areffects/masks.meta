@@ -28,6 +28,12 @@ services:
       - 80:80
       - 8080:8080
       - 443:443
+    depends_on:
+      - mongo
+      - vault
+      - back
+      - landing
+      - market
   mongo:
     container_name: mongo
     build: ./dockerfiles/mongo/
@@ -46,9 +52,12 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ./masks.be/src:/back/src
+      - ./masks.be:/back
       - mongodata:/data/db
-    command: ["npm", "run", "start:prod"]
+    depends_on:
+      - mongo
+      - vault
+    command: ["yarn", "start:dev"]
   landing:
     container_name: landing
     build:
@@ -59,8 +68,11 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./masks.fe.landing/src:/landing/src
-    command: ["./node_modules/.bin/next", "start", "-p", "3000"]
+      - ./masks.fe.landing:/landing
+    depends_on:
+      - mongo
+      - back
+    command: ["yarn", "dev", "-p", "3000"]
   market:
     container_name: market
     build:
@@ -71,8 +83,11 @@ services:
     ports:
       - 3010:3010
     volumes:
-      - ./masks.fe.market/src:/market/src
-    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
+      - ./masks.fe.market:/market
+    depends_on:
+      - mongo
+      - back
+    command: ["yarn", "dev", "-p", "3010"]
   storybook:
     container_name: storybook
     build:
@@ -83,7 +98,7 @@ services:
     ports:
       - 6006:6006
     volumes:
-      - ./masks.fe.landing/src:/storybook/src
+      - ./masks.fe.landing:/storybook
     command: ["yarn", "storybook"]
 volumes:
   mongodata:
