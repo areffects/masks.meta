@@ -43,3 +43,22 @@ meta git push origin -u <YOUR_BRANCH_NAME>
 ```sh
 meta git push
 ```
+
+7. Prepare ENVs for internal apps & services
+
+Front
+```
+NODE_ENV=development
+```
+
+Back
+```
+NODE_ENV=development
+```
+
+8. Start apps & services using `docker-compose`
+
+```bash
+docker-compose -f docker-compose.dev.yml build
+docker-compose -f docker-compose.dev.yml up -d
+```

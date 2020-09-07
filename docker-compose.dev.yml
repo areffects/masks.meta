@@ -1,0 +1,71 @@
+version: "3"
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - ./dockerfiles/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+      - 8080:8080
+      - 443:443
+  mongo:
+    container_name: mongo
+    build: ./dockerfiles/mongo/
+    volumes:
+      - mongodata:/data/db
+      - ./dockerfiles/mongo/mongod.conf:/etc/mongo/mongod.conf
+    ports:
+      - 27017:27017
+  back:
+    container_name: back
+    build:
+      context: ./masks.be/
+      dockerfile: ../dockerfiles/masks.be/Dockerfile
+    env_file:
+      - ./masks.be/.env
+    ports:
+      - 4000:4000
+    volumes:
+      - ./masks.be/src:/back/src
+      - mongodata:/data/db
+    command: ["npm", "run", "start:prod"]
+  landing:
+    container_name: landing
+    build:
+      context: ./masks.fe.landing/
+      dockerfile: ../dockerfiles/masks.fe.landing/Dockerfile
+    env_file:
+      - ./masks.fe.landing/.env
+    ports:
+      - 3000:3000
+    volumes:
+      - ./masks.fe.landing/src:/landing/src
+    command: ["./node_modules/.bin/next", "start", "-p", "3000"]
+  market:
+    container_name: market
+    build:
+      context: ./masks.fe.market/
+      dockerfile: ../dockerfiles/masks.fe.market/Dockerfile
+    env_file:
+      - ./masks.fe.market/.env
+    ports:
+      - 3010:3010
+    volumes:
+      - ./masks.fe.market/src:/market/src
+    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
+  storybook:
+    container_name: storybook
+    build:
+      context: ./masks.fe.landing/
+      dockerfile: ../dockerfiles/masks.fe.landing/.storybook/Dockerfile
+    env_file:
+      - ./masks.fe.landing/.env
+    ports:
+      - 6006:6006
+    volumes:
+      - ./masks.fe.landing/src:/storybook/src
+    command: ["yarn", "storybook"]
+volumes:
+  mongodata:
