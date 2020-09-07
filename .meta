@@ -1,7 +1,9 @@
 {
   "projects": {
-    "masks-fe-landing": "git@github.com:areffects/masks.fe.landing.git",
-    "masks-fe-market": "git@github.com:areffects/masks.fe.market.git",
-    "masks-be": "git@github.com:areffects/masks.be.git"
+    "masks.fe.landing": "git@github.com:areffects/masks.fe.landing.git",
+    "masks.fe.market": "git@github.com:areffects/masks.fe.market.git",
+    "masks.mongo": "git@github.com:areffects/masks.mongo.git",
+    "masks.nginx": "git@github.com:areffects/masks.nginx.git",
+    "masks.be": "git@github.com:areffects/masks.be.git"
   }
 }
