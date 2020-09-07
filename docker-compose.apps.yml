@@ -1,72 +1,55 @@
 version: "3"
 
 services:
-  storybook:
-    container_name: masks-storybook
+  masks-fe-landing:
+    container_name: masks-fe-landing
     build:
-      context: ./masks-front/
-<<<<<<< HEAD:docker-compose.yml
+      context: ./masks-fe-landing/
       dockerfile: ./.storybook/Dockerfile
-=======
-      dockerfile: ../dockerfiles/masks-front/.storybook/Dockerfile
->>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
     ports:
-      - 6006:6006
+      - 19000:19000
     volumes:
-      - ./masks-front/src:/app/src
-      - ./masks-front/public:/app/public
-      - ./masks-front/.env:/app/.env
-      - ./masks-front/tsconfig.json:/app/tsconfig.json
-      - ./masks-front/package.json:/app/package.json
-      - ./masks-front/.storybook:/app/.storybook
-      - mongodata:/data/db
-    command: ["yarn", "storybook"]
-  back:
-    container_name: masks-back
+      - ./masks-fe-landing/src:/app/src
+      - ./masks-fe-landing/public:/app/public
+      - ./masks-fe-landing/.env:/app/.env
+      - ./masks-fe-landing/tsconfig.json:/app/tsconfig.json
+      - ./masks-fe-landing/package.json:/app/package.json
+      - ./masks-fe-landing/.storybook:/app/.storybook
+    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
+  masks-be:
+    container_name: masks-be
     build:
-      context: ./masks-back/
-<<<<<<< HEAD:docker-compose.yml
+      context: ./masks-be/
       dockerfile: ./Dockerfile
-=======
-      dockerfile: ../dockerfiles/masks-back/Dockerfile
->>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
       - PORT
     ports:
-      - 4000:4000
+      - 19010:19010
     volumes:
-      - ./masks-back/src:/app/src
-      - ./masks-back/.env:/app/.env
-      - ./masks-back/tsconfig.json:/app/tsconfig.json
-      - ./masks-back/package.json:/app/package.json
-      - mongodata:/data/db
+      - ./masks-be/src:/app/src
+      - ./masks-be/.env:/app/.env
+      - ./masks-be/tsconfig.json:/app/tsconfig.json
+      - ./masks-be/package.json:/app/package.json
     command: ["npm", "run", "start:prod"]
-  market:
-<<<<<<< HEAD:docker-compose.yml
-    container_name: masks-market
+  masks-fe-market:
+    container_name: masks-fe-market
     build:
-      context: ./masks-market/
+      context: ./masks-fe-market/
       dockerfile: ./Dockerfile
-=======
-    build:
-      context: ./masks-market/
-      dockerfile: ../dockerfiles/masks-market/Dockerfile
->>>>>>> 62bae567edbe8cd4a54c72354e9f184552418bf8:docker-compose.apps.yml
     environment:
       - NODE_ENV
       - API_URL
     ports:
-      - 3010:3010
+      - 19001:19001
     volumes:
-      - ./masks-market/src:/app/src
-      - ./masks-market/public:/app/public
-      - ./masks-market/.env:/app/.env
-      - ./masks-market/tsconfig.json:/app/tsconfig.json
-      - ./masks-market/package.json:/app/package.json
-      - mongodata:/data/db
-    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
+      - ./masks-fe-market/src:/app/src
+      - ./masks-fe-market/public:/app/public
+      - ./masks-fe-market/.env:/app/.env
+      - ./masks-fe-market/tsconfig.json:/app/tsconfig.json
+      - ./masks-fe-market/package.json:/app/package.json
+    command: ["./node_modules/.bin/next", "start", "-p", "19001"]
 volumes:
   mongodata:

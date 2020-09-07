@@ -1,7 +1,10 @@
-./masks-front
-!dockerfiles/masks-front
-./masks-market
-!dockerfiles/masks-market
-./masks-back
-!dockerfiles/masks-back
+./masks-fe-landing
+!dockerfiles/masks-fe-landing
+./masks-fe-market
+!dockerfiles/masks-fe-market
+./masks-be
+!dockerfiles/masks-be
 masks.code-workspace
+/masks-fe-landing/
+/masks-fe-market/
+/masks-be/

@@ -13,7 +13,7 @@ npm i -g meta
 2. Clone this repo
 
 ```sh
-meta git git@github.com:areffects/masks.meta.git
+meta git clone git@github.com:areffects/masks.meta.git
 ```
 
 3. Create new branch (USE `develop` AS BASE!!!)
@@ -44,7 +44,7 @@ meta git push origin -u <YOUR_BRANCH_NAME>
 meta git push
 ```
 
-## Docker 
+## Docker
 
 To start apps
 
@@ -61,5 +61,19 @@ docker-compose -f docker-compose.services.yml up -d
 To ls all running docker-containers
 
 ```
-docker ps | grep 
+docker ps | grep masks
+```
+
+## Vault
+
+To setup vault you need to login here
+
+```
+http://0.0.0.0:8200
+```
+
+All config here
+
+```
+./dockerfiles/vault/config
 ```
