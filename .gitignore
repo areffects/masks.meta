@@ -1,7 +1,12 @@
 masks.code-workspace
+
 !dockerfiles/masks-fe-landing
 !dockerfiles/masks-fe-market
 !dockerfiles/masks-be
+!dockerfiles/mongo
+!dockerfiles/nginx
+!dockerfiles/vault
+
 /masks.fe.landing/
 /masks.fe.market/
 /masks.be/
