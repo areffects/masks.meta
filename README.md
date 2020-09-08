@@ -6,19 +6,19 @@ This repo is made to ease work with multiple connected Masks apps & services.
 
 1. Install `meta` plugin
 
-```sh
+```bash
 npm i -g meta
 ```
 
 2. Clone this repo
 
-```sh
+```bash
 meta git clone git@github.com:areffects/masks.meta.git
 ```
 
 3. Create new branch (USE `develop` AS BASE!!!)
 
-```sh
+```bash
 meta git checkout develop
 meta git checkout -b <YOUR_BRANCH_NAME>
 ```
@@ -27,53 +27,54 @@ meta git checkout -b <YOUR_BRANCH_NAME>
 
 5. Add, commit (space after `-m` is important)
 
-```sh
+```bash
 meta git add .
 meta git commit -m "<COMMIT_MESSAGE>"
 ```
 
 6.1. If you are pushing first time - push with upstream
 
-```sh
+```bash
 meta git push origin -u <YOUR_BRANCH_NAME>
 ```
 
 6.2. Otherwise - just push
 
-```sh
+```bash
 meta git push
 ```
 
-## Docker
+7. Prepare ENVs for internal apps & services
 
-To start apps
+Front
 
-```sh
-docker-compose -f docker-compose.apps.yml up -d
+```bash
+NODE_ENV=development
 ```
 
-To start services
+Back
 
-```
-docker-compose -f docker-compose.services.yml up -d
+```bash
+NODE_ENV=development
 ```
 
-To ls all running docker-containers
+8. Start apps & services using `docker-compose`
 
-```
-docker ps | grep masks
+```bash
+docker-compose -f docker-compose.dev.yml build
+docker-compose -f docker-compose.dev.yml up -d
 ```
 
 ## Vault
 
 To setup vault you need to login here
 
-```
-http://0.0.0.0:8200
+```bash
+http://localhost/vault
 ```
 
 All config here
 
-```
+```bash
 ./dockerfiles/vault/config
 ```

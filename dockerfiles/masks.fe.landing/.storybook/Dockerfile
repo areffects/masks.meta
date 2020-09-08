@@ -1,4 +1,4 @@
 FROM mhart/alpine-node:12 AS builder
 
-WORKDIR /app
+WORKDIR /storybook
 COPY ./ ./

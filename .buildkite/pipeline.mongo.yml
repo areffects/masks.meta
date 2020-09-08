@@ -1,4 +1,0 @@
-steps:
-  - label: 'build & run mongo'
-    command:
-      - "docker-compose -f docker-compose.services.yml up -d --build mongo"      
