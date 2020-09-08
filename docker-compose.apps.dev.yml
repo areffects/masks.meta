@@ -17,7 +17,7 @@ services:
       - ./masks-fe-landing/tsconfig.json:/app/tsconfig.json
       - ./masks-fe-landing/package.json:/app/package.json
       - ./masks-fe-landing/.storybook:/app/.storybook
-    command: ["./node_modules/.bin/next", "start", "-p", "3010"]
+    command: ["./node_modules/.bin/next", "start", "-p", "19000"]
   masks-be:
     container_name: masks-be
     build:
@@ -33,7 +33,7 @@ services:
       - ./masks-be/.env:/app/.env
       - ./masks-be/tsconfig.json:/app/tsconfig.json
       - ./masks-be/package.json:/app/package.json
-    command: ["npm", "run", "start:prod"]
+    command: ["npm", "run", "start:dev"]
   masks-fe-market:
     container_name: masks-fe-market
     build:
