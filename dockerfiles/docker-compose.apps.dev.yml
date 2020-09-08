@@ -1,0 +1,54 @@
+version: "3"
+
+services:
+  back:
+    container_name: back
+    build:
+      context: ./masks.be/
+      dockerfile: ./Dockerfile
+    env_file:
+      - ../masks-be/.env
+    ports:
+      - 4000:4000
+    volumes:
+      - ./masks.be:/back
+      - mongodata:/data/db
+    command: ["yarn", "start:dev"]
+  landing:
+    container_name: landing
+    build:
+      context: ./masks.fe.landing/
+      dockerfile: ./Dockerfile
+    env_file:
+      - ../masks-fe-landing/.env
+    ports:
+      - 3000:3000
+    volumes:
+      - ../masks.fe.landing:/landing
+    command: ["yarn", "dev", "-p", "3000"]
+  market:
+    container_name: market
+    build:
+      context: ./masks.fe.market/
+      dockerfile: ./Dockerfile
+    env_file:
+      - ../masks-fe-market/.env
+    ports:
+      - 3010:3010
+    volumes:
+      - ../masks.fe.market:/market
+    command: ["yarn", "dev", "-p", "3010"]
+  storybook:
+    container_name: storybook
+    build:
+      context: ../masks-fe-landing
+      dockerfile: ./.storybook/Dockerfile
+    env_file:
+      - ../masks-fe-landing/.env
+    ports:
+      - 6006:6006
+    volumes:
+      - ../masks.fe.landing:/storybook
+    command: ["yarn", "storybook"]
+volumes:
+  mongodata:

@@ -1,0 +1,22 @@
+{
+  "name": "masks.meta",
+  "version": "1.0.0",
+  "description": "Masks.",
+  "main": "index.js",
+  "scripts": {
+    "up:apps:dev": "docker-compose -f ./dockerfiles/docker-compose.apps.dev.yml up -d",
+    "down:apps:dev": "docker-compose -f ./dockerfiles/docker-compose.apps.dev.yml down",
+    "up:services:dev": "docker-compose -f ./dockerfiles/docker-compose.services.dev.yml up -d",
+    "down:services:dev": "docker-compose -f ./dockerfiles/docker-compose.services.dev.yml down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/areffects/masks.meta.git"
+  },
+  "author": "team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/areffects/masks.meta/issues"
+  },
+  "homepage": "https://github.com/areffects/masks.meta#readme"
+}

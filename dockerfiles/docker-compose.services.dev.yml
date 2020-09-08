@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  vault:
+    container_name: vault
+    image: vault:latest
+    volumes:
+      - ./vault/config:/vault/config
+      - ./vault/policies:/vault/policies
+      - ./vault/data:/vault/data
+    ports:
+      - 4010:4010
+    environment:
+      - VAULT_ADDR=http://0.0.0.0:4010
+      - VAULT_API_ADDR=http://0.0.0.0:4010
+      - VAULT_ADDRESS=http://0.0.0.0:4010
+      - VAULT_DEV_LISTEN_ADDRESS=http://0.0.0.0:4010
+      - VAULT_DEV_ROOT_TOKEN_ID=myroot
+    cap_add:
+      - IPC_LOCK
+    command: vault server -config=/vault/config/vault.hcl
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+      - 8080:8080
+      - 443:443
+  mongo:
+    container_name: mongo
+    build: ./mongo/
+    volumes:
+      - mongodata:/data/db
+      - ./mongo/mongod.conf:/etc/mongo/mongod.conf
+    ports:
+      - 27017:27017
+volumes:
+  mongodata:

@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+  masks-fe-landing:
+    container_name: masks-fe-landing
+    build:
+      context: ../masks-fe-landing/
+      dockerfile: ./.storybook/Dockerfile
+    environment:
+      - NODE_ENV
+    ports:
+      - 19000:19000
+    volumes:
+      - ../masks-fe-landing/src:/app/src
+      - ../masks-fe-landing/public:/app/public
+      - ../masks-fe-landing/.env:/app/.env
+      - ../masks-fe-landing/tsconfig.json:/app/tsconfig.json
+      - ../masks-fe-landing/package.json:/app/package.json
+      - ../masks-fe-landing/.storybook:/app/.storybook
+    command: ["./node_modules/.bin/next", "start", "-p", "19000"]
+  masks-be:
+    container_name: masks-be
+    build:
+      context: ../masks-be/
+      dockerfile: ./Dockerfile
+    environment:
+      - NODE_ENV
+      - PORT
+    ports:
+      - 19010:19010
+    volumes:
+      - ../masks-be/src:/app/src
+      - ../masks-be/.env:/app/.env
+      - ../masks-be/tsconfig.json:/app/tsconfig.json
+      - ../masks-be/package.json:/app/package.json
+    command: ["npm", "run", "start:prod"]
+  masks-fe-market:
+    container_name: masks-fe-market
+    build:
+      context: ../masks-fe-market/
+      dockerfile: ./Dockerfile
+    environment:
+      - NODE_ENV
+      - API_URL
+    ports:
+      - 19001:19001
+    volumes:
+      - ../masks-fe-market/src:/app/src
+      - ../masks-fe-market/public:/app/public
+      - ../masks-fe-market/.env:/app/.env
+      - ../masks-fe-market/tsconfig.json:/app/tsconfig.json
+      - ../masks-fe-market/package.json:/app/package.json
+    command: ["./node_modules/.bin/next", "start", "-p", "19001"]
+volumes:
+  mongodata:

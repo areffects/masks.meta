@@ -5,9 +5,9 @@ services:
     container_name: vault
     image: vault:latest
     volumes:
-      - ./dockerfiles/vault/config:/vault/config
-      - ./dockerfiles/vault/policies:/vault/policies
-      - ./dockerfiles/vault/data:/vault/data
+      - ./vault/config:/vault/config
+      - ./vault/policies:/vault/policies
+      - ./vault/data:/vault/data
     ports:
       - 4010:4010
     environment:
@@ -23,7 +23,7 @@ services:
     container_name: nginx
     image: nginx:latest
     volumes:
-      - ./dockerfiles/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
       - 8080:8080
@@ -36,17 +36,17 @@ services:
       - market
   mongo:
     container_name: mongo
-    build: ./dockerfiles/mongo/
+    build: ./mongo/
     volumes:
       - mongodata:/data/db
-      - ./dockerfiles/mongo/mongod.conf:/etc/mongo/mongod.conf
+      - ./mongo/mongod.conf:/etc/mongo/mongod.conf
     ports:
       - 27017:27017
   back:
     container_name: back
     build:
       context: ./masks.be/
-      dockerfile: ../dockerfiles/masks.be/Dockerfile
+      dockerfile: ../masks.be/Dockerfile
     env_file:
       - ./masks.be/.env
     ports:
@@ -61,14 +61,14 @@ services:
   landing:
     container_name: landing
     build:
-      context: ./masks.fe.landing/
-      dockerfile: ../dockerfiles/masks.fe.landing/Dockerfile
+      context: ../masks.fe.landing/
+      dockerfile: ../masks.fe.landing/Dockerfile
     env_file:
-      - ./masks.fe.landing/.env
+      - ../masks.fe.landing/.env
     ports:
       - 3000:3000
     volumes:
-      - ./masks.fe.landing:/landing
+      - ../masks.fe.landing:/landing
     depends_on:
       - mongo
       - back
@@ -76,14 +76,14 @@ services:
   market:
     container_name: market
     build:
-      context: ./masks.fe.market/
-      dockerfile: ../dockerfiles/masks.fe.market/Dockerfile
+      context: ../masks.fe.market/
+      dockerfile: ../masks.fe.market/Dockerfile
     env_file:
-      - ./masks.fe.market/.env
+      - ../masks.fe.market/.env
     ports:
       - 3010:3010
     volumes:
-      - ./masks.fe.market:/market
+      - ../masks.fe.market:/market
     depends_on:
       - mongo
       - back
@@ -91,14 +91,14 @@ services:
   storybook:
     container_name: storybook
     build:
-      context: ./masks.fe.landing/
+      context: ../masks.fe.landing/
       dockerfile: ../dockerfiles/masks.fe.landing/.storybook/Dockerfile
     env_file:
-      - ./masks.fe.landing/.env
+      - ../masks.fe.landing/.env
     ports:
       - 6006:6006
     volumes:
-      - ./masks.fe.landing:/storybook
+      - ../masks.fe.landing:/storybook
     command: ["yarn", "storybook"]
 volumes:
   mongodata:
