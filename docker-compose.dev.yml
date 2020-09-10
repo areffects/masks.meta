@@ -11,7 +11,6 @@ services:
     ports:
       - 4010:4010
     environment:
-      - VAULT_ADDR=http://0.0.0.0:4010
       - VAULT_API_ADDR=http://0.0.0.0:4010
       - VAULT_ADDRESS=http://0.0.0.0:4010
       - VAULT_DEV_LISTEN_ADDRESS=http://0.0.0.0:4010
@@ -52,7 +51,7 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - ./masks.be:/back
+      - ./masks.be:/app
       - mongodata:/data/db
     depends_on:
       - mongo
@@ -68,7 +67,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./masks.fe.landing:/landing
+      - ./masks.fe.landing:/app
     depends_on:
       - mongo
       - back
@@ -83,7 +82,7 @@ services:
     ports:
       - 3010:3010
     volumes:
-      - ./masks.fe.market:/market
+      - ./masks.fe.market:/app
     depends_on:
       - mongo
       - back
