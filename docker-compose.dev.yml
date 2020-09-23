@@ -56,7 +56,7 @@ services:
     depends_on:
       - mongo
       - vault
-    command: ["yarn", "start:dev"]
+    command: ["yarn", "start:debug"]
   landing:
     container_name: landing
     build:
