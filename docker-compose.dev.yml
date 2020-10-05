@@ -28,7 +28,6 @@ services:
       - 8080:8080
       - 443:443
     depends_on:
-      - mongo
       - vault
       - back
       - landing
@@ -50,11 +49,11 @@ services:
       - ./masks.be/.env
     ports:
       - 4000:4000
+      - 9229:9229
     volumes:
       - ./masks.be:/app
       - mongodata:/data/db
     depends_on:
-      - mongo
       - vault
     command: ["yarn", "start:debug"]
   landing:
@@ -69,7 +68,6 @@ services:
     volumes:
       - ./masks.fe.landing:/app
     depends_on:
-      - mongo
       - back
     command: ["yarn", "dev", "-p", "3000"]
   market:
@@ -84,7 +82,6 @@ services:
     volumes:
       - ./masks.fe.market:/app
     depends_on:
-      - mongo
       - back
     command: ["yarn", "dev", "-p", "3010"]
   storybook:
