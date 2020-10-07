@@ -7,71 +7,90 @@ This repo is made to ease work with multiple connected Masks apps & services.
 1. Install `meta` plugin
 
 ```bash
-npm i -g meta
+$ npm i -g meta
 ```
 
 2. Clone this repo
 
 ```bash
-meta git clone git@github.com:areffects/masks.meta.git
+$ meta git clone git@github.com:areffects/masks.meta.git
 ```
 
 3. Create new branch (USE `develop` AS BASE!!!)
 
 ```bash
-meta git checkout develop
-meta git checkout -b <YOUR_BRANCH_NAME>
+$ meta git checkout develop
+$ meta git checkout -b <YOUR_BRANCH_NAME>
 ```
 
-4. Perform required changes in source code
+4. Prepare ENVs for internal apps & services
 
-5. Add, commit (space after `-m` is important)
+To copy all default env files run this:
 
 ```bash
-meta git add .
-meta git commit -m "<COMMIT_MESSAGE>"
+$ cp ./masks.be/.env.example ./masks.be/.env
+$ cp ./masks.fe.landing/.env.example ./masks.fe.landing/.env
+$ cp ./masks.fe.market/.env.example ./masks.fe.market/.env
 ```
 
-6.1. If you are pushing first time - push with upstream
+5. Run script
+
+   ```bash
+   $ yarn
+   ```
+
+   in
+
+   `masks.be/`
+
+   `masks.fe.landing/`
+
+   `masks.fe.market/`
+
+   folders
+
+6. Start apps & services using `docker-compose`
+
+For development
 
 ```bash
-meta git push origin -u <YOUR_BRANCH_NAME>
+$ yarn up:dev
 ```
 
-6.2. Otherwise - just push
+For production
 
 ```bash
-meta git push
+$ yarn up:prod
 ```
 
-7. Prepare ENVs for internal apps & services
+## Guide to commit
 
-Front
+1 Perform required changes in source code
+
+2 Add, commit (space after `-m` is important)
 
 ```bash
-NODE_ENV=development
+$ meta git add .
+$ meta git commit -m "<COMMIT_MESSAGE>"
 ```
 
-Back
+2.1. If you are pushing first time - push with upstream
 
 ```bash
-NODE_ENV=development
+$ meta git push origin -u <YOUR_BRANCH_NAME>
 ```
 
-8. Start apps & services using `docker-compose`
+2.2. Otherwise - just push
 
 ```bash
-docker-compose -f docker-compose.dev.yml build
-docker-compose -f docker-compose.dev.yml up -d
+$ meta git push
 ```
 
 ## Vault
 
 To setup vault you need to login here
 
-```bash
 http://localhost/vault
-```
 
 All config here
 
