@@ -52,7 +52,6 @@ services:
       - 9229:9229
     volumes:
       - ./masks.be:/app
-      - mongodata:/data/db
     depends_on:
       - vault
     command: ["yarn", "start:debug"]
